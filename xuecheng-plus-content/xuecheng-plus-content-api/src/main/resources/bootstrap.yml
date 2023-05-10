@@ -1,0 +1,39 @@
+
+#微服务配置
+spring:
+  application:
+    name: content-api
+  cloud:
+    nacos:
+      server-addr: 192.168.71.12:8848
+      discovery:
+        namespace: ${spring.profiles.active}
+        group: xuecheng-plus-project
+      config:
+        namespace: ${spring.profiles.active}
+        group: xuecheng-plus-project
+        file-extension: yaml
+        refresh-enabled: true
+        extension-configs:
+          - data-id: content-service-${spring.profiles.active}.yaml
+            group: xuecheng-plus-project
+            refresh: true
+        shared-configs:
+          - data-id: swagger-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+          - data-id: logging-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+          - data-id: freemarker-config-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+  #profiles默认为dev
+  profiles:
+    active: dev
+
+test_config:
+  a: 4a
+  b: 4b
+  c: 4c
+  d: 4d
